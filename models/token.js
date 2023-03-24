@@ -44,10 +44,11 @@ class Token {
 
     async destroy() {
         const response = await db.query(
-            "DELETE * FROM token WHERE token = $1",
+            "DELETE FROM token WHERE token = $1",
             [this.token]
         );
-        return new Token(response.rows[0]);
+        if (response.rowCount!= 1) throw new Error("Unable to locate token.");
+        return response;
     }
 }
 

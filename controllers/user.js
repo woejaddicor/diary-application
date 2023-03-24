@@ -33,7 +33,7 @@ async function logout (req, res) {
     const data = req.body;
     try {
         const token = await Token.getOneByToken(data.token);
-        console.log(token);
+        if (!token) throw new Error("Invalid token.");
         const result = await token.destroy();
         res.status(200).json(result);
     } catch (err) {
