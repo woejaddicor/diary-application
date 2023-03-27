@@ -34,6 +34,7 @@ CREATE TABLE complaints_post(
     complaint_id INT,
     creation_date timestamp,
     update_date timestamp,
+    votes INT DEFAULT 0,
     PRIMARY KEY (post_id),
     FOREIGN KEY (complaint_id) REFERENCES complaints ("complaint_id"),
     FOREIGN KEY (user_id) REFERENCES user_account("user_id")
@@ -44,6 +45,7 @@ CREATE TABLE listings (
     user_id INT NOT NULL,
     image_url VARCHAR(255),
     price INT NOT NULL,
+    title VARCHAR(255),
     description VARCHAR(255),
     sold BOOLEAN DEFAULT FALSE,
     creation_date timestamp,
@@ -55,9 +57,11 @@ CREATE TABLE listings (
 CREATE TABLE information (
     post_id INT GENERATED ALWAYS AS IDENTITY,
     user_id INT NOT NULL,
+    title VARCHAR(255),
     content VARCHAR(1000),
     creation_date timestamp,
     update_date timestamp,
+    votes INT DEFAULT 0,
     PRIMARY KEY (post_id),
     FOREIGN KEY (user_id) REFERENCES user_account("user_id")
 );
@@ -67,6 +71,7 @@ CREATE TABLE skill_share(
     title VARCHAR(255) NOT NULL,
     content VARCHAR(255) NOT NULL,
     video_url VARCHAR(255) NOT NULL,
+    votes INT DEFAULT 0,
     PRIMARY KEY(post_id),
     FOREIGN KEY (user_id) REFERENCES user_account("user_id")
 );
